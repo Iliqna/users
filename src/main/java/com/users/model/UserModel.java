@@ -1,14 +1,30 @@
 package com.users.model;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+
 public class UserModel {
 
     private String id = "";
-    private String firstName;
-    private String lastName;
+
+    @NotBlank(message = "Full name is required")
+    @Pattern(regexp = "(^[a-zA-Z\\-\\s]+$)|(^[а-яА-Я\\-\\s]+$)", message = "Full name must contain only latin or cyrillic letters")
+    private String name;
+
+    @NotBlank(message = "Pin is required")
+    @Pattern(regexp = "[0-9]{10}", message = "Pin must be 10 digit long")
     private String pin;
+
+    @NotBlank(message = "Address type is required")
     private String addrType;
+
     private String addrInfo;
+
+    @NotBlank(message = "Email type is required")
     private String emailType;
+
+    @Email(message = "Email is not valid")
     private String email;
 
     public String getId() {
@@ -19,20 +35,12 @@ public class UserModel {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getPin() {

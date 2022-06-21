@@ -39,17 +39,18 @@ INSERT INTO t_people(full_name, pin) VALUES
 ("Ivaylo Ivanov", "0123456789"),
 ("Ivan Ivanov", "1111111111"),
 ("Стоян Иванов", "2222222222"),
-('Ivan Stoyanov', "4444444444"),
-('Stoyan Stoyanov', "5555555555"),
 ("Ivan Ivanov", "6666666666");
 
 INSERT INTO t_mails(t_people_id, email_type, email) VALUES
 ((select id from t_people where full_name = "Ivaylo Ivanov"), 'A', "ivan_iv@abv.bg"),
 ((select id from t_people where full_name = "Ivan Ivanov" and pin = "1111111111"), "A", null),
-((select id from t_people where full_name = "Стоян Иванов"), "B", null);
+((select id from t_people where full_name = "Стоян Иванов"), "B", null),
+((select id from t_people where full_name = "Ivan Ivanov" and pin = "6666666666"), "B", null)
+;
 
 
 INSERT INTO t_addresses(t_people_id, addr_type, addr_info) VALUES
 ((select id from t_people where full_name = "Ivaylo Ivanov"), "A", "Ivan Vazov 3"),
 ((select id from t_people where full_name = "Ivan Ivanov" and pin = "1111111111"), "A", "Boris I"),
-((select id from t_people where full_name = "Стоян Иванов"), "B", "Hristo Botev");
+((select id from t_people where full_name = "Стоян Иванов"), "B", "Hristo Botev"),
+((select id from t_people where full_name = "Ivan Ivanov" and pin = "6666666666"), "B", null);

@@ -42,7 +42,7 @@ public class UserModelService {
 
     public void save(final UserModel userModel) {
 
-        final User user = new User(getFullName(userModel), userModel.getPin());
+        final User user = new User(userModel.getName().trim(), userModel.getPin());
         user.getAddressList().add(new Address(userModel.getAddrType(), userModel.getAddrInfo()));
         user.getEmailList().add(new Email(userModel.getEmailType(), userModel.getEmail()));
         userService.save(user);
@@ -51,7 +51,7 @@ public class UserModelService {
     public void update(final UserModel userModel) {
         final Long userId = Long.parseLong(userModel.getId());
         final User user = userService.findById(userId);
-        user.setFullName(getFullName(userModel));
+        user.setFullName(userModel.getName().trim());
         user.setPin(userModel.getPin());
         user.getAddressList().clear();
         user.getEmailList().clear();
@@ -67,9 +67,5 @@ public class UserModelService {
     public void delete(final Long userId) {
         final User user = userService.findById(userId);
         userService.delete(user);
-    }
-
-    private String getFullName(final UserModel userModel) {
-        return userModel.getFirstName().trim() + " " + userModel.getLastName().trim();
     }
 }
